@@ -120,7 +120,7 @@ public class Status_Report {
         System.out.println(" ");
     }
 
-    public void get_Host_info() throws  Exception{
+    public void get_Host_info(List<Resource_info.Host_info> H_list) throws  Exception{
         String DEVICE_API_URL= "http://203.237.53.130:8181/onos/v1/hosts";
         URL onos = null;
         String tIP;
@@ -155,12 +155,12 @@ public class Status_Report {
                 Temp_h.location = Object2.get("elementId").toString();
                 Temp_h.location += "/" + Object2.get("port").toString();
             }*/
-            Host_list.add(Temp_h);
+            H_list.add(Temp_h);
 
         }
     }
 
-    public void get_Link_info() throws  Exception{
+    public void get_Link_info(List<Resource_info.Link_info> L_list) throws  Exception{
         String DEVICE_API_URL= "http://203.237.53.130:8181/onos/v1/links";
         URL onos = null;
         String tIP;
@@ -188,7 +188,7 @@ public class Status_Report {
                 Temp_h.location = Object2.get("elementId").toString();
                 Temp_h.location += "/" + Object2.get("port").toString();
             }*/
-            Link_list.add(Temp_l);
+            L_list.add(Temp_l);
 
         }
     }
@@ -284,7 +284,7 @@ public class Status_Report {
         System.out.println(" ");
     }
 
-    public void Interface_status(){
+    public void Interface_status(List<Resource_info.Host_info> Host_list){
         int i,j;
         System.out.println("Check IoT device's connectivity");
 
