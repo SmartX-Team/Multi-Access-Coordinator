@@ -26,6 +26,7 @@ public class Main {
         Interfae_Selection is = new Interfae_Selection();
         Intent_Installer ii = new Intent_Installer();
         Backup_DB_man db = new Backup_DB_man();
+        String[] user_input = new String[2];
 
         sr.Read_teamplate();
         sr.get_Host_info();
@@ -42,12 +43,13 @@ public class Main {
         is.Interface_Selection_Result();
 
 
-
-        sr.get_Path_info(ii.User_selection());
+        user_input = ii.User_selection();
+        sr.get_Path_info(user_input);
         sr.Print_Controller_PathInfo();
         sr.Path_parser();
+        sr.Print_Parsing_Path_result();
         ii.Intent_installer();
-        /*sr.Print_Parsing_Path_result();*/
+
 
         /*db.DB_Access();
         db.DB_Push();

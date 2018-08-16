@@ -9,8 +9,10 @@ public class Resource_info {
     private static Resource_info resource_info = null;
     List<Device_info> D_info = new ArrayList<Device_info>();
     List<Resource_info.Host_info> Host_list = new ArrayList<Resource_info.Host_info>();
+    List<Resource_info.Host_info> Temp_Host_list = new ArrayList<Resource_info.Host_info>();
     List<Resource_info.Selection_Info> Selection_list = new ArrayList<Selection_Info>();
     List<Resource_info.Link_info> Link_list = new ArrayList<Resource_info.Link_info>();
+    List<Resource_info.Link_info> Temp_Link_list = new ArrayList<Resource_info.Link_info>();
     List<String> Path_list = new ArrayList<String>();
     String Path = null;
     /*Resource_info.Device_info Sel_info = new Resource_info.Device_info();

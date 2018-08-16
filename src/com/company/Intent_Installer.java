@@ -62,17 +62,22 @@ public class Intent_Installer {
         return ID_input;
     }
 
-    public void Intent_installer(){
+    public void Intent_installer() throws Exception{
         int i;
-        System.out.println("Parsed Path information");
+        String Command1,Command2;
 
-        for(i=0; i<Path_list.size(); i++){
-            System.out.println(Path_list.get(i).toString());
+        for(i=0; i<Path_list.size()-1; i+=2){
+            Command1 = "";
+            Command2 = "";
+
+            Command1 += "add-point-intent " + Path_list.get(i).toString() + " "+ Path_list.get(i+1).toString();
+            Command2 += "add-point-intent " + Path_list.get(i+1).toString() + " "+ Path_list.get(i).toString();
+            System.out.println("Command1: "+ Command1);
+            System.out.println("Command2: "+ Command2);
+            Connect_to_ONOS_Controller(Command1);
+            Connect_to_ONOS_Controller(Command2);
+
         }
-        System.out.println("length of Path_list: "+Path_list.size());
-
-        System.out.println(" ");
-        System.out.println(" ");
     }
 
     public void Connect_to_ONOS_Controller(String command) throws Exception{
@@ -112,5 +117,11 @@ public class Intent_Installer {
 
         channel.disconnect();
         session.disconnect();
+    }
+
+    public void remove_All_Intent() throws Exception {
+        System.out.println("Remove all Intent! ");
+        String command = "remove-intent --purge org.onosproject.cli";
+        Connect_to_ONOS_Controller(command);
     }
 }
