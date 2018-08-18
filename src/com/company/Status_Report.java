@@ -319,7 +319,7 @@ public class Status_Report {
         System.out.println("Path information from the SDN Controller you selected");
 
         System.out.println(Path);
-        System.out.println("length of Link_list: "+Path.length());
+
 
         System.out.println(" ");
         System.out.println(" ");
@@ -347,6 +347,10 @@ public class Status_Report {
 
         System.out.println(" ");
         System.out.println(" ");
+    }
+
+    public void Clear_Path(){
+        Path = null;
     }
 
 }

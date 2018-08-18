@@ -18,11 +18,11 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws Exception {
         int k =0;
-        Resource_info resource_info = null;
-        List<Resource_info.Device_info> D_info = new ArrayList<Resource_info.Device_info>();
-        List<Resource_info.Host_info> Host_list = new ArrayList<Resource_info.Host_info>();
-        List<Resource_info.Link_info> Link_list = new ArrayList<Resource_info.Link_info>();
-        String Path_list = null;
+        Resource_info resource_info = Resource_info.getInstance();
+        List<Resource_info.Device_info> D_info = resource_info.getD_info();
+        List<Resource_info.Host_info> Host_list = resource_info.getHost_list();
+        List<Resource_info.Link_info> Link_list = resource_info.getLink_info();
+        List<String> Path_list = resource_info.getPath_info();
         Boolean flag;
         String[] user_input = new String[2];
 
@@ -34,29 +34,64 @@ public class Main {
 
 
         sr.Read_teamplate();
-        sr.get_Host_info(Host_list);
-        sr.get_Link_info(Link_list);
-        sr.Interface_status(Host_list);
+        while(true) {
+            sr.get_Host_info(Host_list);
+            sr.get_Link_info(Link_list);
+            sr.Interface_status(Host_list);
 
 
-        is.Int_selection();
-        is.Interface_Selection_Result();
+            is.Int_selection();
+            is.Interface_Selection_Result();
 
 
-        user_input = ii.User_selection();
-        sr.get_Path_info(user_input);
-        sr.Print_Controller_PathInfo();
-        sr.Path_parser();
-        sr.Print_Parsing_Path_result();
-        ii.Intent_installer();
-
-        /*Thread.sleep(60000);*/
-        while(true){
-            flag = tcp.Topology_change_detector(Host_list, Link_list);
-
-            System.out.println(flag);
+            user_input = ii.User_selection();
+            sr.get_Path_info(user_input);
+            sr.Print_Controller_PathInfo();
+            sr.Path_parser();
+            sr.Print_Parsing_Path_result();
+            ii.Intent_installer();
 
             Thread.sleep(60000);
+            while (true) {
+                flag = tcp.Topology_change_detector(Host_list, Link_list);
+                tcp.TCP_list_clear();
+                if (flag == true) {
+                    System.out.println("");
+                    System.out.println(" Topology is not changed: Do nothing ");
+                    System.out.println("");
+
+                } else {
+                    System.out.println("");
+                    System.out.println(" Topology is changed: Find new path to intent installation ");
+                    System.out.println("");
+
+                    ii.remove_All_Intent();
+
+                    Host_list.clear();
+                    Link_list.clear();
+                    Path_list.clear();
+                    is.IS_list_clear();
+                    sr.Clear_Path();
+                    System.out.println("System data structure clear!");
+                    System.out.println("");
+
+                    sr.get_Host_info(Host_list);
+                    sr.get_Link_info(Link_list);
+                    sr.Interface_status(Host_list);
+
+
+                    is.Int_selection();
+                    is.Interface_Selection_Result();
+
+                    sr.get_Path_info(user_input);
+                    sr.Print_Controller_PathInfo();
+                    sr.Path_parser();
+                    sr.Print_Parsing_Path_result();
+                    ii.Intent_installer();
+                }
+
+                Thread.sleep(60000);
+            }
         }
 
 

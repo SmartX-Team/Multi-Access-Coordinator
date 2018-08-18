@@ -13,8 +13,9 @@ package com.company;
     import com.jcraft.jsch.ChannelExec;
     import com.jcraft.jsch.JSch;
     import com.jcraft.jsch.Session;
+    import sun.awt.image.ImageWatched;
 
-    public class Topology_change_handler {
+public class Topology_change_handler {
 
         Resource_info resource_info = Resource_info.getInstance();
         List<Resource_info.Device_info> D_info = resource_info.getD_info();
@@ -37,6 +38,9 @@ package com.company;
             int[] host_checksum = new int[Temp_Host_list.size()];
             int[] link_checksum = new int[Temp_Link_list.size()];
 
+            if(Temp_Host_list.size() != Host_list.size()){
+                return false;
+            }
             for(i=0; i<Temp_Host_list.size(); i++){
                 for(j=0; j<Host_list.size(); j++){
                     if(Temp_Host_list.get(i).location.toString().equals(Host_list.get(j).location.toString())){
@@ -49,6 +53,10 @@ package com.company;
                     host_checksum[i] = 1;
                 }
                 checksum_flag = false;
+            }
+
+            if(Temp_Link_list.size() != Link_list.size()){
+                return false;
             }
 
             for(i=0; i<Temp_Link_list.size(); i++){
@@ -104,5 +112,9 @@ package com.company;
 
 
             return flag;
+        }
+        public void TCP_list_clear(){
+            Temp_Link_list.clear();
+            Temp_Host_list.clear();
         }
 }

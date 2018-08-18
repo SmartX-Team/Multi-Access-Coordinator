@@ -12,7 +12,7 @@ public class Interfae_Selection {
     List<Resource_info.Device_info> D_info = resource_info.getD_info();
     List<Resource_info.Host_info> Host_list = resource_info.getHost_list();
     List<Resource_info.Selection_Info> Selection_list = resource_info.getSelection_list();
-    List<String> Path_list = new ArrayList<String>();
+    List<String> Path_list = resource_info.getPath_info();
     String Path = null;
 
 
@@ -142,6 +142,10 @@ public class Interfae_Selection {
             System.out.println(" ");
         }
 
+    }
+    public void IS_list_clear(){
+        Selection_list.clear();
+        D_info.clear();
     }
 
 }
