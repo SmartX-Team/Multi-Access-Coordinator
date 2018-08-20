@@ -65,18 +65,29 @@ public class Intent_Installer {
     public void Intent_installer() throws Exception{
         int i;
         String Command1,Command2;
+        if(Path_list.size() > 1) {
+            for (i = 0; i < Path_list.size() - 1; i += 2) {
+                Command1 = "";
+                Command2 = "";
 
-        for(i=0; i<Path_list.size()-1; i+=2){
+                Command1 += "add-point-intent " + Path_list.get(i).toString() + " " + Path_list.get(i + 1).toString();
+                Command2 += "add-point-intent " + Path_list.get(i + 1).toString() + " " + Path_list.get(i).toString();
+                System.out.println("Command1: " + Command1);
+                System.out.println("Command2: " + Command2);
+                Connect_to_ONOS_Controller(Command1);
+                Connect_to_ONOS_Controller(Command2);
+
+            }
+        }else{
             Command1 = "";
             Command2 = "";
 
-            Command1 += "add-point-intent " + Path_list.get(i).toString() + " "+ Path_list.get(i+1).toString();
-            Command2 += "add-point-intent " + Path_list.get(i+1).toString() + " "+ Path_list.get(i).toString();
-            System.out.println("Command1: "+ Command1);
-            System.out.println("Command2: "+ Command2);
+            Command1 += "add-point-intent " + Path_list.get(1).toString() + " " + Path_list.get(2).toString();
+            Command2 += "add-point-intent " + Path_list.get(2).toString() + " " + Path_list.get(1).toString();
+            System.out.println("Command1: " + Command1);
+            System.out.println("Command2: " + Command2);
             Connect_to_ONOS_Controller(Command1);
             Connect_to_ONOS_Controller(Command2);
-
         }
     }
 
