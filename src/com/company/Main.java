@@ -25,6 +25,7 @@ public class Main {
         List<String> Path_list = resource_info.getPath_info();
         Boolean flag;
         String[] user_input = new String[2];
+        String[] ID_input = new String[2];
 
         Status_Report sr = new Status_Report();
         Interfae_Selection is = new Interfae_Selection();
@@ -45,13 +46,14 @@ public class Main {
 
 
             user_input = ii.User_selection();
-            sr.get_Path_info(user_input);
+            ID_input = ii.Host_selection(user_input);
+            sr.get_Path_info(ID_input);
             sr.Print_Controller_PathInfo();
             sr.Path_parser();
             sr.Print_Parsing_Path_result();
             ii.Intent_installer();
 
-            Thread.sleep(60000);
+            Thread.sleep(20000);
             while (true) {
                 flag = tcp.Topology_change_detector(Host_list, Link_list);
                 tcp.TCP_list_clear();
@@ -83,7 +85,8 @@ public class Main {
                     is.Int_selection();
                     is.Interface_Selection_Result();
 
-                    sr.get_Path_info(user_input);
+                    ID_input = ii.Host_selection(user_input);
+                    sr.get_Path_info(ID_input);
                     sr.Print_Controller_PathInfo();
                     sr.Path_parser();
                     sr.Print_Parsing_Path_result();

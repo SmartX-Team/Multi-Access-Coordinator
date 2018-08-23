@@ -31,35 +31,38 @@ public class Intent_Installer {
     public static String Controller_ID="karaf";
     public static String Controller_Pw="karaf";
 
-    public String[] User_selection(){
-        int i,j;
-        String User_sel1 = null, User_sel2 = null;
+    public String[] User_selection() {
+        int i, j;
+
         String[] input = new String[2];
-        String[] ID_input = new String[2];
+
         Scanner scan = new Scanner(System.in);
 
         input[0] = scan.next();
         input[1] = scan.next();
 
+        return input;
+    }
+    public String[] Host_selection(String input[]){
+        int i,j;
+        String[] Sel = new String [2];
         for(i=0; i<Selection_list.size(); i++){
             if(Selection_list.get(i).Can_Info.ID.toString().equals(input[0])){
-                User_sel1 = Selection_list.get(i).Sel_Info.sel_ID;
+               Sel[0] = Selection_list.get(i).Sel_Info.sel_ID;
             }
             else if(Selection_list.get(i).Can_Info.ID.toString().equals(input[1])){
-                User_sel2 = Selection_list.get(i).Sel_Info.sel_ID;
+                Sel[1] = Selection_list.get(i).Sel_Info.sel_ID;
             }
         }
 
-        System.out.println("********User_sel1: "+ User_sel1 +"**************");
-        System.out.println("********User_sel2: "+ User_sel2 +"**************");
+        System.out.println("********User_sel1: "+ Sel[0] +"**************");
+        System.out.println("********User_sel2: "+ Sel[1] +"**************");
 
-        ID_input[0] = User_sel1;
-        ID_input[1] = User_sel2;
 
 /*        System.out.println("********ID_input[0]: "+ ID_input[0] +"**************");
         System.out.println("********ID_input[1]: "+ ID_input[1] +"**************");*/
 
-        return ID_input;
+        return Sel;
     }
 
     public void Intent_installer() throws Exception{
