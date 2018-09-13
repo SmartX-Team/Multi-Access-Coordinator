@@ -37,7 +37,7 @@ public class Status_Report {
         session.setConfig("StrictHostKeyChecking","no");
         session.connect();
 
-        String command = "cat ~/Templates/deviceinfo.json";
+        String command = "cat ~/deviceinfo.json";
 
         ChannelExec channel = (ChannelExec) session.openChannel("exec");
         channel.setCommand(command);
@@ -83,9 +83,9 @@ public class Status_Report {
             Resource_info.Device_info tDinfo = new Resource_info.Device_info();
             JSONObject Object = (JSONObject) InfoArray.get(i);
             tDinfo.Dev_ID = Object.get("id").toString();
-            tDinfo.Wired_IP = Object.get("Wired").toString();
-            tDinfo.Wifi_IP = Object.get("Wifi").toString();
-            tDinfo.LTE_IP = Object.get("LTE").toString();
+            tDinfo.Wired_MAC = Object.get("Wired").toString();
+            tDinfo.Wifi_MAC = Object.get("Wifi").toString();
+            tDinfo.LTE_MAC = Object.get("LTE").toString();
             tDinfo.Wired_conn = 'X';
             tDinfo.Wifi_conn = 'X';
             tDinfo.LTE_conn = 'X';
@@ -290,23 +290,23 @@ public class Status_Report {
 
         for(i=0; i<D_info.size(); i++){
             for(j=0; j< Host_list.size(); j++){
-                if(D_info.get(i).Wired_IP.toString().equals(Host_list.get(j).IP.toString())){
+                if(D_info.get(i).Wired_MAC.toString().equals(Host_list.get(j).MAC.toString())){
                     D_info.get(i).Wired_conn = 'O';
                     D_info.get(i).Wired_ID = Host_list.get(j).ID;
                     D_info.get(i).Wired_loc = Host_list.get(j).location.toString();
-                    D_info.get(i).Wired_MAC = Host_list.get(j).MAC.toString();
+                    D_info.get(i).Wired_IP = Host_list.get(j).IP.toString();
                 }
-                else if(D_info.get(i).Wifi_IP.toString().equals(Host_list.get(j).IP.toString())){
+                else if(D_info.get(i).Wifi_MAC.toString().equals(Host_list.get(j).MAC.toString())){
                     D_info.get(i).Wifi_conn = 'O';
                     D_info.get(i).Wifi_ID = Host_list.get(j).ID;
                     D_info.get(i).Wifi_loc = Host_list.get(j).location.toString();
-                    D_info.get(i).Wifi_MAC = Host_list.get(j).MAC.toString();
+                    D_info.get(i).Wifi_IP = Host_list.get(j).IP.toString();
                 }
-                else if(D_info.get(i).LTE_IP.toString().equals(Host_list.get(j).IP.toString())){
+                else if(D_info.get(i).LTE_MAC.toString().equals(Host_list.get(j).MAC.toString())){
                     D_info.get(i).LTE_conn = 'O';
                     D_info.get(i).LTE_ID = Host_list.get(j).ID;
                     D_info.get(i).LTE_loc = Host_list.get(j).location.toString();
-                    D_info.get(i).LTE_MAC = Host_list.get(j).MAC.toString();
+                    D_info.get(i).LTE_IP = Host_list.get(j).IP.toString();
                 }
                 else
                     continue;

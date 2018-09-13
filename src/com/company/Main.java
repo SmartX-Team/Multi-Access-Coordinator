@@ -17,7 +17,7 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        int k =0;
+        int k = 0;
         Resource_info resource_info = Resource_info.getInstance();
         List<Resource_info.Device_info> D_info = resource_info.getD_info();
         List<Resource_info.Host_info> Host_list = resource_info.getHost_list();
@@ -34,12 +34,12 @@ public class Main {
         Backup_DB_man db = new Backup_DB_man();
 
 
-        sr.Read_teamplate();
-        while(true) {
+
+        while (true) {
+            sr.Read_teamplate();
             sr.get_Host_info(Host_list);
             sr.get_Link_info(Link_list);
             sr.Interface_status(Host_list);
-
 
             is.Int_selection();
             is.Interface_Selection_Result();
@@ -53,7 +53,7 @@ public class Main {
             sr.Print_Parsing_Path_result();
             ii.Intent_installer();
 
-            Thread.sleep(20000);
+            Thread.sleep(60000);
             while (true) {
                 flag = tcp.Topology_change_detector(Host_list, Link_list);
                 tcp.TCP_list_clear();
@@ -62,6 +62,7 @@ public class Main {
                     System.out.println(" Topology is not changed: Do nothing ");
                     System.out.println("");
 
+                    Thread.sleep(60000);
                 } else {
                     System.out.println("");
                     System.out.println(" Topology is changed: Find new path to intent installation ");
@@ -77,28 +78,14 @@ public class Main {
                     System.out.println("System data structure clear!");
                     System.out.println("");
 
-                    sr.get_Host_info(Host_list);
-                    sr.get_Link_info(Link_list);
-                    sr.Interface_status(Host_list);
+                    break;
 
 
-                    is.Int_selection();
-                    is.Interface_Selection_Result();
-
-                    ID_input = ii.Host_selection(user_input);
-                    sr.get_Path_info(ID_input);
-                    sr.Print_Controller_PathInfo();
-                    sr.Path_parser();
-                    sr.Print_Parsing_Path_result();
-                    ii.Intent_installer();
                 }
-
-                Thread.sleep(60000);
             }
+
+
         }
-
-
-
     }
 
 }
