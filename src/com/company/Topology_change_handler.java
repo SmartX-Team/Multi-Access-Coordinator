@@ -23,6 +23,7 @@ public class Topology_change_handler {
         List<Resource_info.Selection_Info> Selection_list = resource_info.getSelection_list();
         List<Resource_info.Link_info> Link_list = new ArrayList<Resource_info.Link_info>();
         List<String> Path_list = resource_info.getPath_info();
+        String[] Src_Dst_Mac = resource_info.getSrc_Dst_Mac();
 
         List<Resource_info.Host_info> Temp_Host_list = new ArrayList<Resource_info.Host_info>();
         List<Resource_info.Link_info> Temp_Link_list = new ArrayList<Resource_info.Link_info>();

@@ -12,6 +12,7 @@ public class Resource_info {
     List<Resource_info.Selection_Info> Selection_list = new ArrayList<Selection_Info>();
     List<Resource_info.Link_info> Link_list = new ArrayList<Resource_info.Link_info>();
     List<String> Path_list = new ArrayList<String>();
+    String[] Src_Dst_Mac = new String[2];
     String Path = null;
     /*Resource_info.Device_info Sel_info = new Resource_info.Device_info();
     Resource_info.Device_info Can_info = new Resource_info.Device_info();
@@ -126,6 +127,7 @@ public class Resource_info {
     public String getPath(){
         return Path;
     }
+    public String[] getSrc_Dst_Mac() {return Src_Dst_Mac;}
 
     public List<Selection_Info> getSelection_list(){
         return Selection_list;

@@ -18,11 +18,14 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws Exception {
         int k = 0;
+        int i, j;
         Resource_info resource_info = Resource_info.getInstance();
         List<Resource_info.Device_info> D_info = resource_info.getD_info();
         List<Resource_info.Host_info> Host_list = resource_info.getHost_list();
         List<Resource_info.Link_info> Link_list = resource_info.getLink_info();
+        List<Resource_info.Selection_Info> Selection_list = resource_info.getSelection_list();
         List<String> Path_list = resource_info.getPath_info();
+        String[] Src_Dst_Mac = resource_info.getSrc_Dst_Mac();
         Boolean flag;
         String[] user_input = new String[2];
         String[] ID_input = new String[2];
@@ -44,14 +47,26 @@ public class Main {
             is.Int_selection();
             is.Interface_Selection_Result();
 
+            for(i=0; i< Selection_list.size()-1; i++){
+                for(j=i+1; j< Selection_list.size(); j++){
+                    user_input = ii.Selection_list_iterator(Selection_list,i,j);
+                    sr.get_Path_info(user_input);
+                    sr.Print_Controller_PathInfo();
+                    sr.Path_parser();
+                    sr.Print_Parsing_Path_result();
+                    ii.Intent_installer();
 
-            user_input = ii.User_selection();
+                    Path_list.clear();
+                    sr.Clear_Path();
+                }
+            }
+            /*user_input = ii.User_selection();
             ID_input = ii.Host_selection(user_input);
             sr.get_Path_info(ID_input);
             sr.Print_Controller_PathInfo();
             sr.Path_parser();
             sr.Print_Parsing_Path_result();
-            ii.Intent_installer();
+            ii.Intent_installer();*/
 
             Thread.sleep(60000);
             while (true) {

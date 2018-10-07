@@ -24,6 +24,8 @@ public class Status_Report {
     List<Resource_info.Host_info> Host_list = resource_info.getHost_list();
     List<Resource_info.Link_info> Link_list = resource_info.getLink_info();
     List<String> Path_list = resource_info.getPath_info();
+    String[] Src_Dst_Mac = resource_info.getSrc_Dst_Mac();
+
     //List<Resource_info.Path_info> Path_list = resource_info.getPath_info();
     String Path = resource_info.getPath();
 
@@ -335,6 +337,16 @@ public class Status_Report {
 
             Path_list.add(a);
         }
+        Src_Dst_Mac[0] = path[0].substring(path[0].length()-25, path[0].length()-8);
+        Src_Dst_Mac[1] = path[path.length-1].substring(path[path.length-1].length()-25, path[path.length-1].length()-8);
+
+
+        System.out.println("**********************************");
+        System.out.println("**********************************");
+        System.out.println("**********************************");
+        System.out.println("Src_Dst_Mac[0]: " + Src_Dst_Mac[0]);
+        System.out.println("Src_Dst_Mac[1]: " + Src_Dst_Mac[1]);
+        System.out.println("**********************************");
     }
     public void Print_Parsing_Path_result(){
         int i;

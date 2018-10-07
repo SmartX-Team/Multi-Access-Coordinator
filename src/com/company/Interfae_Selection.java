@@ -13,6 +13,7 @@ public class Interfae_Selection {
     List<Resource_info.Host_info> Host_list = resource_info.getHost_list();
     List<Resource_info.Selection_Info> Selection_list = resource_info.getSelection_list();
     List<String> Path_list = resource_info.getPath_info();
+    String[] Src_Dst_Mac = resource_info.getSrc_Dst_Mac();
     String Path = null;
 
 

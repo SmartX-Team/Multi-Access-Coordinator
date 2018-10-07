@@ -21,6 +21,7 @@ public class Intent_Installer {
     List<Resource_info.Host_info> Host_list = resource_info.getHost_list();
     List<Resource_info.Selection_Info> Selection_list = resource_info.getSelection_list();
     List<String> Path_list = resource_info.getPath_info();
+    String[] Src_Dst_Mac = resource_info.getSrc_Dst_Mac();
     String Path = null;
 
     private static String USER_ID ="jskim";
@@ -32,14 +33,23 @@ public class Intent_Installer {
     public static String Controller_Pw="karaf";
 
     public String[] User_selection() {
-        int i, j;
 
         String[] input = new String[2];
+
 
         Scanner scan = new Scanner(System.in);
 
         input[0] = scan.next();
         input[1] = scan.next();
+
+        return input;
+    }
+
+    public String[] Selection_list_iterator(List<Resource_info.Selection_Info> Selection_list,int i, int j){
+        String[] input = new String[2];
+
+        input[0] = Selection_list.get(i).Sel_Info.sel_ID;
+        input[1] = Selection_list.get(j).Sel_Info.sel_ID;
 
         return input;
     }
@@ -73,13 +83,13 @@ public class Intent_Installer {
                 Command1 = "";
                 Command2 = "";
 
-                Command1 += "add-point-intent " + Path_list.get(i).toString() + " " + Path_list.get(i + 1).toString();
-                Command2 += "add-point-intent " + Path_list.get(i + 1).toString() + " " + Path_list.get(i).toString();
+                Command1 += "add-point-intent -s "+ Src_Dst_Mac[0] + " -d " + Src_Dst_Mac[1] + " " + Path_list.get(i).toString() + " " + Path_list.get(i + 1).toString();
+                Command2 += "add-point-intent -s "+ Src_Dst_Mac[1] + " -d " + Src_Dst_Mac[0] + " " + Path_list.get(i + 1).toString() + " " + Path_list.get(i).toString();
                 System.out.println("Command1: " + Command1);
                 System.out.println("Command2: " + Command2);
                 Connect_to_ONOS_Controller(Command1);
                 Connect_to_ONOS_Controller(Command2);
-
+                System.out.println(" ");
             }
         }else{
             Command1 = "";
@@ -91,6 +101,7 @@ public class Intent_Installer {
             System.out.println("Command2: " + Command2);
             Connect_to_ONOS_Controller(Command1);
             Connect_to_ONOS_Controller(Command2);
+            System.out.println(" ");
         }
     }
 
